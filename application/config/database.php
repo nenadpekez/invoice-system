@@ -76,8 +76,11 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'			=> '',
 	'hostname' 		=> 'localhost',
-	'username' 		=> 'nenadpek1_nenadpek_idr',
-	'password' 		=> 'vKqP]c&m#4(.',
+	'username' 		=> 'nenadpek1',
+	'password' 		=> 'Mm3YaVeJXygU',
+	
+	//'username' 		=> 'nenadpek1_nenadpek_idr',
+	//'password' 		=> 'vKqP]c&m#4(.',
 	'database' 		=> 'nenadpek_pis_idr',
 	'dbdriver' 		=> 'mysqli',
 	'dbprefix' 		=> '',
