@@ -186,7 +186,7 @@ class Data_model extends CI_Model {
     function checkTableName($table_name)
     {
         $databasename = $this->db->database;
-        $query = $this->db->query("SELECT table_name FROM information_schema.tables WHERE table_schema = '$databasename' AND table_name = '$table_name';");
+        $query = $this->db->query("SELECT ".$this->db->dbprefix."table_name FROM information_schema.tables WHERE table_schema = '$databasename' AND table_name = '$table_name';");
         return ($query->num_rows() > 0)?true:false;
 
     }
