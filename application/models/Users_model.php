@@ -80,6 +80,7 @@ class Users_model extends CI_Model {
                 WHERE u.user_uid=%s"
                 ,$this->db->escape($id)
             );
+        file_put_contents(FCPATH . "debug.log", "\n\nREPORTING DB ERROR\n --- file ".__FILE__." | function ".__FUNCTION__." ln ".__LINE__." ---\n".print_r($sql,1)."\n\n", FILE_APPEND);
         $res = $this->db->query($sql);
         if(is_array($res) && isset($res['code']) && $res['code'] != 0) {
             file_put_contents(FCPATH . "debug.log", "\n\nREPORTING DB ERROR\n --- file ".__FILE__." | function ".__FUNCTION__." ln ".__LINE__." ---\n".print_r($res,1)."\n\n", FILE_APPEND);
