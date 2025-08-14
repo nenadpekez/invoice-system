@@ -37,7 +37,8 @@ class Data_model extends CI_Model {
         //GET FORM
         $sql = sprintf("SELECT * FROM idr_forms WHERE form_name=%s LIMIT 1"
                 ,$this->db->escape($form)
-            );
+        );
+        file_put_contents(FCPATH . "debug.log", "\n\nREPORTING DB ERROR\n --- file ".__FILE__." | function ".__FUNCTION__." ln ".__LINE__." ---\n".$sql."\n\n", FILE_APPEND);
         $res = $this->db->query($sql);
         if(is_array($res) && isset($res['code']) && $res['code'] != 0) {
             file_put_contents(FCPATH . "debug.log", "\n\nREPORTING DB ERROR\n --- file ".__FILE__." | function ".__FUNCTION__." ln ".__LINE__." ---\n".print_r($res,1)."\n\n", FILE_APPEND);
