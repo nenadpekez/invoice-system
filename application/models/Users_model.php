@@ -37,9 +37,9 @@ class Users_model extends CI_Model {
                 ,d.title as department_title
                 ,d.location as department_location
                 ,CONCAT(ud.firstname, ' ', ud.lastname) as user
-            FROM users u
-            LEFT JOIN users_data ud ON ud.user_id = u.user_id
-            LEFT JOIN departments d ON d.department_id = ud.department_id"
+            FROM idr_users u
+            LEFT JOIN idr_users_data ud ON ud.user_id = u.user_id
+            LEFT JOIN idr_departments d ON d.department_id = ud.department_id"
         );
         $res = $this->db->query($sql);
         if(is_array($res) && isset($res['code']) && $res['code'] != 0) {
@@ -74,9 +74,9 @@ class Users_model extends CI_Model {
                     ,d.title as department_title
                     ,d.location as department_location
                     ,CONCAT(ud.firstname, ' ', ud.lastname) as user
-                FROM users u
-                LEFT JOIN users_data ud ON ud.user_id = u.user_id
-                LEFT JOIN departments d ON d.department_id = ud.department_id
+                FROM idr_users u
+                LEFT JOIN idr_users_data ud ON ud.user_id = u.user_id
+                LEFT JOIN idr_departments d ON d.department_id = ud.department_id
                 WHERE u.user_uid=%s"
                 ,$this->db->escape($id)
             );
@@ -115,9 +115,9 @@ class Users_model extends CI_Model {
                     ,d.title as department_title
                     ,d.location as department_location
                     ,CONCAT(ud.firstname, ' ', ud.lastname) as user
-                FROM users u
-                LEFT JOIN users_data ud ON ud.user_id = u.user_id
-                LEFT JOIN departments d ON d.department_id = ud.department_id
+                FROM idr_users u
+                LEFT JOIN idr_users_data ud ON ud.user_id = u.user_id
+                LEFT JOIN idr_departments d ON d.department_id = ud.department_id
                 WHERE u.user_uid=%s"
                 ,$this->db->escape($id)
             );
@@ -134,7 +134,7 @@ class Users_model extends CI_Model {
     {
         $sql = sprintf("SELECT 
                     user_id as user_id
-                FROM users
+                FROM idr_users
                 WHERE MD5(user_uid)=%s"
                 ,$this->db->escape($uid)
             );
@@ -166,7 +166,7 @@ class Users_model extends CI_Model {
             return false;
         }
         //update user
-        $sql = sprintf("UPDATE users SET
+        $sql = sprintf("UPDATE idr_users SET
                     user_username=%s
                     ,user_level=%s
                     ,time_changed=%s
@@ -185,7 +185,7 @@ class Users_model extends CI_Model {
             return false;
         }
         if(isset($user['user_password']) && $user['user_password'] != '') {
-            $sql = sprintf("UPDATE users SET
+            $sql = sprintf("UPDATE idr_users SET
                         user_password=%s
                     WHERE user_id=%d"
                 ,$this->db->escape(md5($user['user_password']))
@@ -194,7 +194,7 @@ class Users_model extends CI_Model {
             $res = $this->db->query($sql);
         }
 
-        $sql = sprintf("UPDATE users_data SET
+        $sql = sprintf("UPDATE idr_users_data SET
                     title=%s
                     ,firstname=%s
                     ,lastname=%s
@@ -227,7 +227,7 @@ class Users_model extends CI_Model {
     {
         //$this->db->where('user_id', $id);
         //$query = $this->db->get('users');
-        $sql = sprintf("INSERT INTO users 
+        $sql = sprintf("INSERT INTO idr_users 
                     (user_uid
                     ,user_username
                     ,user_password
@@ -246,7 +246,7 @@ class Users_model extends CI_Model {
         }
         $last_id = $this->db->insert_id(); 
 
-        $sql = sprintf("INSERT INTO users_data
+        $sql = sprintf("INSERT INTO idr_users_data
                     (user_id
                     ,title
                     ,firstname
@@ -276,7 +276,7 @@ class Users_model extends CI_Model {
         $this->db->where('user_username', $username);
         $this->db->where('user_password', md5($password));
 
-        $res = $this->db->get('users');
+        $res = $this->db->get('idr_users');
         if(is_array($res) && isset($res['code']) && $res['code'] != 0) {
             //file_put_contents(FCPATH . "debug.log", "\n\nREPORTING DB ERROR\n --- file ".__FILE__." | function ".__FUNCTION__." ln ".__LINE__." ---\n".print_r($res,1)."\n\n", FILE_APPEND);
             return false;
@@ -299,7 +299,7 @@ class Users_model extends CI_Model {
         $this->db->where('user_username', $username);
         $this->db->where('user_password', md5($password));
 
-        $res = $this->db->get('users');
+        $res = $this->db->get('idr_users');
         if(is_array($res) && isset($res['code']) && $res['code'] != 0) {
             file_put_contents(FCPATH . "debug.log", "\n\nREPORTING DB ERROR\n --- file ".__FILE__." | function ".__FUNCTION__." ln ".__LINE__." ---\n".print_r($res,1)."\n\n", FILE_APPEND);
             return false;
@@ -319,7 +319,7 @@ class Users_model extends CI_Model {
     function check_username() {
         $username = $this->input->post('username');
         $this->db->where('user_username', $username);
-        $res = $this->db->get('users');     
+        $res = $this->db->get('idr_users');     
         if(is_array($res) && isset($res['code']) && $res['code'] != 0) {
             file_put_contents(FCPATH . "debug.log", "\n\nREPORTING DB ERROR\n --- file ".__FILE__." | function ".__FUNCTION__." ln ".__LINE__." ---\n".print_r($res,1)."\n\n", FILE_APPEND);
             return false;
