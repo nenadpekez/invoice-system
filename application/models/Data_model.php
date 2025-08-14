@@ -38,7 +38,7 @@ class Data_model extends CI_Model {
         $sql = sprintf("SELECT * FROM idr_forms WHERE form_name=%s LIMIT 1"
                 ,$this->db->escape($form)
         );
-        file_put_contents(FCPATH . "debug.log", "\n\nREPORTING DB ERROR\n --- file ".__FILE__." | function ".__FUNCTION__." ln ".__LINE__." ---\n".$sql."\n\n", FILE_APPEND);
+        
         $res = $this->db->query($sql);
         if(is_array($res) && isset($res['code']) && $res['code'] != 0) {
             file_put_contents(FCPATH . "debug.log", "\n\nREPORTING DB ERROR\n --- file ".__FILE__." | function ".__FUNCTION__." ln ".__LINE__." ---\n".print_r($res,1)."\n\n", FILE_APPEND);
@@ -119,7 +119,7 @@ class Data_model extends CI_Model {
                     file_put_contents(FCPATH . "debug.log", "\n\nREPORTING DB ERROR\n --- file ".__FILE__." | function ".__FUNCTION__." ln ".__LINE__." ---\n".print_r($res,1)."\n\n", FILE_APPEND);
                     return false;
                 }
-                file_put_contents(FCPATH . "debug.log", "--- file ".__FILE__." | function ".__FUNCTION__." ln ".__LINE__." ---\n".print_r($res->row(),1), FILE_APPEND);
+                //file_put_contents(FCPATH . "debug.log", "--- file ".__FILE__." | function ".__FUNCTION__." ln ".__LINE__." ---\n".print_r($res->row(),1), FILE_APPEND);
                 //$field_value = $res->row();
                 
                 $res_options = $res->result();
