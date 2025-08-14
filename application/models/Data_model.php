@@ -143,15 +143,15 @@ class Data_model extends CI_Model {
     
     function getNavigationData()
     {
-		if($this->checkTableName('main_menu')) {
+		if($this->checkTableName('idr_main_menu')) {
 			$this->db->where('active', true);
 			$this->db->where('id_parent', '0');
-			$query = $this->db->get('main_menu');
+			$query = $this->db->get('idr_main_menu');
 			$data = $query->result_array();
 			foreach( $data as $row){
 				$this->db->where('active', true);
 				$this->db->where('id_parent', $row['id']);
-				$query = $this->db->get('main_menu');
+				$query = $this->db->get('idr_main_menu');
 				if($query->num_rows()>0){
 					$item = $query->result_array();
 					$row['child'] = $item;
