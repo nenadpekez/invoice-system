@@ -53,7 +53,7 @@ class Register extends CI_Controller {
 
         $this->form_validation->set_rules('email', 'E-mail', 'required|trim');  
   
-        $this->form_validation->set_rules('username', 'Username', 'trim|xss_clean|is_unique[users.user_username]');
+        $this->form_validation->set_rules('username', 'Username', 'trim|xss_clean|is_unique[idr_users.user_username]');
   
         $this->form_validation->set_rules('password', 'Password', 'required|trim');  
   
