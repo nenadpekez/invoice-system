@@ -1,0 +1,1 @@
+<button class="{button_class}" id="{button_id}">{button_value}</button>

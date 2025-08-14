@@ -1,0 +1,95 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+
+<!--
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+-->
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="<?php echo base_url(); ?>alertify/alertify.js"></script>
+
+
+<script>
+
+function f(){
+alertify
+  .alert("This is an alert dialog.", function(){
+    alertify.message('OK');
+  }); 
+}
+</script>
+
+
+<script>
+	$(document).on('keyup', '#search', function(e) {
+        
+		 var code = e.which; // recommended to use e.which, it's normalized across browsers
+    if(code==13) {
+		e.preventDefault();
+		var search=$('#search').val();
+		var page_num=1;
+		//var page=$('#page').val();		
+		//var id_predavanje=$('#id_predavanje').val();
+        
+        var page='orgJed/ajax';
+        /*
+		page=page+'/ajax';
+		
+		if($('#page').val()==='predavanja_slusaoci') { 		 
+			page='predavanja/ajax_slusaoci';
+		}
+		
+		if($('#page').val()==='predavanja_prisustvo') { 		 
+			page='predavanja/ajax_prisustvo';
+		}
+        */
+		$.ajax({
+			url: '<?php echo base_url(); ?>'+page,
+			type: "POST",
+			data: {
+				search: search,
+				page_num: page_num,
+				//id_predavanje: id_predavanje
+			},
+			//dataType: 'json',
+			success: function(data) {
+                $('#result').replaceWith(data);
+                console.log('ajax ok');
+			},
+			error: function(){
+				console.log('ajax not ok');
+			}
+		});
+	}
+	});
+	</script>
+
+
+<script>
+
+$(document).ready(function() {
+    $("#show_hide_password #eye-btn").on('click', function(event) {
+        event.preventDefault();
+        if($('#show_hide_password input').attr("type") == "text"){
+            $('#show_hide_password input').attr('type', 'password');
+            $('#show_hide_password i').addClass( "fa-eye-slash" );
+			$('#show_hide_password i').removeClass( "fa-eye" );
+			$('#show_hide_password i').attr("title", $('#show_hide_password i').data("show") );
+			
+        }else if($('#show_hide_password input').attr("type") == "password"){
+            $('#show_hide_password input').attr('type', 'text');
+            $('#show_hide_password i').removeClass( "fa-eye-slash" );
+			$('#show_hide_password i').addClass( "fa-eye" );
+			$('#show_hide_password i').attr("title", $('#show_hide_password i').data("hide") );
+        }
+    });
+});
+
+</script>

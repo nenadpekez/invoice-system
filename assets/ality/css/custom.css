@@ -1,0 +1,68 @@
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY3VzdG9tLmNzcyIsInNvdXJjZXMiOlsiY3VzdG9tLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiJ9 */
+
+/*# sourceMappingURL=custom.css.map */
+
+.ease {
+	-webkit-transition: .2s ease;
+	   -moz-transition: .2s ease;
+	     -o-transition: .2s ease;
+	        transition: .2s ease;
+}
+
+.language {
+	margin-left: 20px;
+}
+.language a {
+	opacity: 0.4;
+}
+.language a:hover,
+.language a.selected {
+	opacity: 1;
+}
+
+.dropdown-menu li a {
+	text-decoration: none;
+	color: gray;
+}
+.dropdown-menu li a:hover {
+	text-decoration: none;
+	color: black;
+}
+
+.controls input:disabled,
+.controls select:disabled {
+	background-color: #dbdbdb;
+}
+
+.main-content-login {
+	margin: auto;
+	padding: auto;
+}
+
+.btn-primary{
+	background-color: #334ecb !important;
+}
+div .card-primary {
+	border-color: #334ecb !important;
+}
+
+div .main-sidebar, div .sidebar-style-2 {
+	background-color:#343a40 !important;
+	background-color:#3A3C3E !important;
+}
+
+.main-sidebar .sidebar-menu li a span:hover {
+	color: #ff5d84 !important;
+}
+
+div .sidebar-brand, #sidebar-wrapper {
+	background-color: #3A3C3E !important;
+}
+
+.sidebar-mini .main-sidebar .header-logo {
+    width: 60px;
+}
+.error .help-inline {
+	color: red !important;
+}

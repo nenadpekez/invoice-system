@@ -1,0 +1,1 @@
+<input type="{input_type}" id="{input_id}" placeholder="{input_placeholder}" value="{input_value}">

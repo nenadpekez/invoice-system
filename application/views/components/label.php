@@ -1,0 +1,1 @@
+<label for="{label_for}" class="text-info">{label_value}</label><br>
