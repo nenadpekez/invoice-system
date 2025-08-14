@@ -35,7 +35,7 @@ class Data_model extends CI_Model {
         );
         
         //GET FORM
-        $sql = sprintf("SELECT * FROM idr_forms WHERE form_name=%s LIMIT 1"
+        $sql = sprintf("SELECT * FROM forms WHERE form_name=%s LIMIT 1"
                 ,$this->db->escape($form)
         );
         
@@ -48,7 +48,7 @@ class Data_model extends CI_Model {
         if($res->num_rows()) $ret['form'] = $res->row();
 
         //GET FORM_FIELDS
-        $sql = sprintf("SELECT * FROM idr_form_fields WHERE form_id=%d ORDER BY position"
+        $sql = sprintf("SELECT * FROM form_fields WHERE form_id=%d ORDER BY position"
                 ,$ret['form']->id
             );
         $res = $this->db->query($sql);
@@ -61,7 +61,7 @@ class Data_model extends CI_Model {
 
         //GET FIELD OPTIONS
         foreach ($ret['fields'] as $key => $val) {
-            $sql = sprintf("SELECT * FROM idr_field_options WHERE field_id=%d"
+            $sql = sprintf("SELECT * FROM field_options WHERE field_id=%d"
                     ,$val->id
                 );
             $res = $this->db->query($sql);
@@ -77,7 +77,7 @@ class Data_model extends CI_Model {
         if($id && in_array($form, array(0=>'institution'))) {
             $values = new stdClass();
             foreach ($ret['fields'] as /*$vkey =>*/ $vobj) {
-                $sql = sprintf("SELECT %s FROM idr_%s WHERE %s_id=%s"
+                $sql = sprintf("SELECT %s FROM %s WHERE %s_id=%s"
                         ,$vobj->field_name
                         ,$form
                         ,$form
@@ -110,7 +110,7 @@ class Data_model extends CI_Model {
                  */
                 $params = json_decode($vobj->params);
                 
-                $sql = sprintf("SELECT * FROM idr_%s ORDER BY %s"
+                $sql = sprintf("SELECT * FROM %s ORDER BY %s"
                         ,$params->table
                         ,$params->field_id
                     );
@@ -144,15 +144,15 @@ class Data_model extends CI_Model {
     
     function getNavigationData()
     {
-		if($this->checkTableName('idr_main_menu')) {
+		if($this->checkTableName('main_menu')) {
 			$this->db->where('active', true);
 			$this->db->where('id_parent', '0');
-			$query = $this->db->get('idr_main_menu');
+			$query = $this->db->get('main_menu');
 			$data = $query->result_array();
 			foreach( $data as $row){
 				$this->db->where('active', true);
 				$this->db->where('id_parent', $row['id']);
-				$query = $this->db->get('idr_main_menu');
+				$query = $this->db->get('main_menu');
 				if($query->num_rows()>0){
 					$item = $query->result_array();
 					$row['child'] = $item;
