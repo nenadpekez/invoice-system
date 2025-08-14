@@ -83,7 +83,7 @@ $db['default'] = array(
 	//'password' 		=> 'vKqP]c&m#4(.',
 	'database' 		=> 'nenadpek_pis',
 	'dbdriver' 		=> 'mysqli',
-	'dbprefix' 		=> 'idr_',
+	'dbprefix' 		=> '_idr_',
 	'pconnect' 		=> FALSE,
 	'db_debug' 		=> (ENVIRONMENT !== 'production'),
 	'cache_on' 		=> FALSE,
