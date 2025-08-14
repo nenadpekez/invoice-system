@@ -35,7 +35,7 @@ class Data_model extends CI_Model {
         );
         
         //GET FORM
-        $sql = sprintf("SELECT * FROM forms WHERE form_name=%s LIMIT 1"
+        $sql = sprintf("SELECT * FROM ".$this->db->dbprefix."forms WHERE form_name=%s LIMIT 1"
                 ,$this->db->escape($form)
         );
         
@@ -48,7 +48,7 @@ class Data_model extends CI_Model {
         if($res->num_rows()) $ret['form'] = $res->row();
 
         //GET FORM_FIELDS
-        $sql = sprintf("SELECT * FROM form_fields WHERE form_id=%d ORDER BY position"
+        $sql = sprintf("SELECT * FROM ".$this->db->dbprefix."form_fields WHERE form_id=%d ORDER BY position"
                 ,$ret['form']->id
             );
         $res = $this->db->query($sql);
@@ -61,7 +61,7 @@ class Data_model extends CI_Model {
 
         //GET FIELD OPTIONS
         foreach ($ret['fields'] as $key => $val) {
-            $sql = sprintf("SELECT * FROM field_options WHERE field_id=%d"
+            $sql = sprintf("SELECT * FROM ".$this->db->dbprefix."field_options WHERE field_id=%d"
                     ,$val->id
                 );
             $res = $this->db->query($sql);
@@ -77,7 +77,7 @@ class Data_model extends CI_Model {
         if($id && in_array($form, array(0=>'institution'))) {
             $values = new stdClass();
             foreach ($ret['fields'] as /*$vkey =>*/ $vobj) {
-                $sql = sprintf("SELECT %s FROM %s WHERE %s_id=%s"
+                $sql = sprintf("SELECT %s FROM ".$this->db->dbprefix."%s WHERE %s_id=%s"
                         ,$vobj->field_name
                         ,$form
                         ,$form
@@ -110,7 +110,7 @@ class Data_model extends CI_Model {
                  */
                 $params = json_decode($vobj->params);
                 
-                $sql = sprintf("SELECT * FROM %s ORDER BY %s"
+                $sql = sprintf("SELECT * FROM ".$this->db->dbprefix."%s ORDER BY %s"
                         ,$params->table
                         ,$params->field_id
                     );

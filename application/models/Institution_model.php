@@ -17,7 +17,7 @@ class Institution_model extends CI_Model {
     
     function get_data()
     {
-        $sql = sprintf("SELECT * FROM institution i"
+        $sql = sprintf("SELECT * FROM ".$this->db->dbprefix."institution i"
         );
         $res = $this->db->query($sql);
         if(is_array($res) && isset($res['code']) && $res['code'] != 0) {
@@ -50,7 +50,7 @@ class Institution_model extends CI_Model {
         );
         
         //GET FORM
-        $sql = sprintf("SELECT * FROM forms WHERE form_name=%s LIMIT 1"
+        $sql = sprintf("SELECT * FROM ".$this->db->dbprefix."forms WHERE form_name=%s LIMIT 1"
                 ,$this->db->escape($form)
             );
         $res = $this->db->query($sql);
@@ -62,7 +62,7 @@ class Institution_model extends CI_Model {
         if($res->num_rows()) $ret['form'] = $res->row();
 
         //GET FORM_FIELDS
-        $sql = sprintf("SELECT * FROM form_fields WHERE form_id=%d ORDER BY position"
+        $sql = sprintf("SELECT * FROM ".$this->db->dbprefix."form_fields WHERE form_id=%d ORDER BY position"
                 ,$ret['form']->id
             );
         $res = $this->db->query($sql);
@@ -75,7 +75,7 @@ class Institution_model extends CI_Model {
 
         //GET FIELD OPTIONS
         foreach ($ret['fields'] as $key => $val) {
-            $sql = sprintf("SELECT * FROM field_options WHERE field_id=%d"
+            $sql = sprintf("SELECT * FROM ".$this->db->dbprefix."field_options WHERE field_id=%d"
                     ,$val->id
                 );
             $res = $this->db->query($sql);
@@ -91,7 +91,7 @@ class Institution_model extends CI_Model {
         if($id) {
             $values = new stdClass();
             foreach ($ret['fields'] as /*$vkey =>*/ $vobj) {
-                $sql = sprintf("SELECT %s FROM %s WHERE %s_id=%s"
+                $sql = sprintf("SELECT %s FROM ".$this->db->dbprefix."%s WHERE %s_id=%s"
                         ,$vobj->field_name
                         ,$form
                         ,$form
@@ -132,8 +132,8 @@ class Institution_model extends CI_Model {
                     ,ud.lastname as lastname
                     ,ud.email as email
                     ,CONCAT(ud.firstname, ' ', ud.lastname) as user
-                FROM users u
-                LEFT JOIN users_data ud ON ud.user_id = u.user_id
+                FROM ".$this->db->dbprefix."users u
+                LEFT JOIN ".$this->db->dbprefix."users_data ud ON ud.user_id = u.user_id
                 WHERE u.user_uid=%s"
                 ,$this->db->escape($id)
             );
@@ -150,7 +150,7 @@ class Institution_model extends CI_Model {
     {
         $sql = sprintf("SELECT 
                     institution_id as institution_id
-                FROM idr_institution
+                FROM ".$this->db->dbprefix."institution
                 WHERE MD5(uid)=%s"
                 ,$this->db->escape($uid)
             );
@@ -177,7 +177,7 @@ class Institution_model extends CI_Model {
             return false;
         }
         //update
-        $sql = sprintf("UPDATE institution SET
+        $sql = sprintf("UPDATE ".$this->db->dbprefix."institution SET
                     `name`=%s
                     ,street=%s
                     ,city=%s
@@ -216,7 +216,7 @@ class Institution_model extends CI_Model {
     {
         //$this->db->where('user_id', $id);
         //$query = $this->db->get('users');
-        $sql = sprintf("INSERT INTO users 
+        $sql = sprintf("INSERT INTO ".$this->db->dbprefix."users 
                     (user_uid
                     ,user_username
                     ,user_password
@@ -235,7 +235,7 @@ class Institution_model extends CI_Model {
         }
         $last_id = $this->db->insert_id(); 
 
-        $sql = sprintf("INSERT INTO users_data
+        $sql = sprintf("INSERT INTO ".$this->db->dbprefix."users_data
                     (user_id
                     ,title
                     ,firstname
