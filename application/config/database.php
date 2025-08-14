@@ -81,7 +81,7 @@ $db['default'] = array(
 	
 	//'username' 		=> 'nenadpek1_nenadpek_idr',
 	//'password' 		=> 'vKqP]c&m#4(.',
-	'database' 		=> 'nenadpek_pis_idr',
+	'database' 		=> 'nenadpek_pis',
 	'dbdriver' 		=> 'mysqli',
 	'dbprefix' 		=> '',
 	'pconnect' 		=> FALSE,
