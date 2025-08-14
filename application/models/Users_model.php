@@ -33,7 +33,7 @@ class Users_model extends CI_Model {
                 ,ud.faksimil as faksimil
                 ,ud.job as job
                 ,ud.department_id as department_id
-                ,d.name as department_name
+                ,department_name as department_name
                 ,d.title as department_title
                 ,d.location as department_location
                 ,CONCAT(ud.firstname, ' ', ud.lastname) as user
@@ -70,7 +70,7 @@ class Users_model extends CI_Model {
                     ,ud.faksimil as faksimil
                     ,ud.job as job
                     ,ud.department_id as department_id
-                    ,d.name as department_name
+                    ,department_name as department_name
                     ,d.title as department_title
                     ,d.location as department_location
                     ,CONCAT(ud.firstname, ' ', ud.lastname) as user
@@ -111,7 +111,7 @@ class Users_model extends CI_Model {
                     ,ud.faksimil as faksimil
                     ,ud.job as job
                     ,ud.department_id as department_id
-                    ,d.name as department_name
+                    ,department_name as department_name
                     ,d.title as department_title
                     ,d.location as department_location
                     ,CONCAT(ud.firstname, ' ', ud.lastname) as user
